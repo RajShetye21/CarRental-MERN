@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Test route
+// Test routes
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
