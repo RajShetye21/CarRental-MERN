@@ -1,12 +1,30 @@
 const mongoose = require("mongoose");
 
+let connectionPromise = null;
+
 async function connectDB() {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log("Conected to DB");
-    } catch (e) {
-        console.log("Database connection error - ", e.message);
+    if (mongoose.connection.readyState === 1) {
+        return mongoose.connection;
     }
+
+    if (!process.env.MONGODB_URI) {
+        throw new Error("MONGODB_URI is missing");
+    }
+
+    if (!connectionPromise) {
+        connectionPromise = mongoose
+            .connect(process.env.MONGODB_URI)
+            .then((connection) => {
+                console.log("Connected to MongoDB");
+                return connection;
+            })
+            .catch((error) => {
+                connectionPromise = null;
+                throw error;
+            });
+    }
+
+    return connectionPromise;
 }
 
 module.exports = connectDB;
