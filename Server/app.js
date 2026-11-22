@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://car-rental-sand-kappa.vercel.app"
+        "https://car-rental-lemon-nu.vercel.app"
     ],
     credentials: true
 }));
