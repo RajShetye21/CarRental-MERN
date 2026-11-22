@@ -11,7 +11,13 @@ const bookingRoute = require("./Router/booking.router.js");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://car-rental-sand-kappa.vercel.app"
+    ],
+    credentials: true
+}));
 
 // Test route
 app.get("/", (req, res) => {

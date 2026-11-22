@@ -19,7 +19,7 @@ function Login() {
             setLoading(true);
 
             const { data } = await axios.post(
-                `http://localhost:3000/api/user/${state}`,
+                `/api/user/${state}`,
                 {
                     name,
                     email,
